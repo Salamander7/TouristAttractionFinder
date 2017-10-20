@@ -122,9 +122,14 @@
                         <input id="input_text" type="email" class="text-input--underbar" placeholder="Email" value="">
                         <input id="input_text" type="password" class="text-input--underbar" placeholder="Password" value="">
                         <br><br>
-                        <ons-button modifier="large" class="login_btn" onclick="fn.load('about.html')">Log In</ons-button>
-                        <br><br>
-                        <ons-button modifier="quiet" class="forgot_pass" onclick="fn.load('forgotpswd.html')">Forgot password?</ons-button>
+                        <ons-button modifier="large" class="login_btn" onclick="fn.load('about.html')">LOG IN</ons-button>
+                        <p id="psswd_link">
+                            <a href="#" onclick="fn.load('forgotpswd.html')" >Forgot Password?</a>
+                        </p>
+                        <br>
+                        <p id="signup_link">
+                            Do not have an account?   <a href="#" onclick="fn.load('signup.html')" >Sign Up</a>
+                        </p>
                     </div>
                 </ons-page>
         </template>
@@ -134,11 +139,24 @@
                 <ons-page>
                    <div class="forgotpswd">
                         <img src="img/rsz_1nearme.png">
-                        <input id="input" type="email" class="text-input--underbar" placeholder="Email" value="">
+                        <input id="input_email" type="email" class="text-input--underbar" placeholder="Email" value="">
                         <br><br>
-                        <ons-button modifier="large" class="send_email" onclick="fn.load('about.html')">Send Email</ons-button>
+                        <ons-button modifier="large" class="send_email" onclick="fn.load('about.html')">SEND EMAIL</ons-button>
                         <br><br>
                         <ons-button modifier="quiet" class="rem_pass" onclick="fn.load('about.html')">I remembered my password!!</ons-button>
+                    </div>
+                </ons-page>
+        </template>
+
+        <template id="signup.html">
+                <ons-page>
+                   <div class="signup">
+                        <img src="img/rsz_1nearme.png">
+                        <input id="input_text" type="email" class="text-input--underbar" placeholder="Email" value="">
+                        <input id="input_text" type="password" class="text-input--underbar" placeholder="Create a Password" value="">
+                        <input id="input_text" type="password" class="text-input--underbar" placeholder="Confirm Password" value="">
+                        <br><br>
+                        <ons-button modifier="large" class="signup_btn" onclick="fn.load('about.html')">SIGN UP</ons-button>
                     </div>
                 </ons-page>
         </template>
