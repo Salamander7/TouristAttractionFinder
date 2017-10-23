@@ -1,0 +1,60 @@
+.toolbar--material{
+    background-color: #F35F64;
+}
+
+/****   Buttons - Login, Forgot Password, Sign Up *****/
+.login, .forgotpswd, .signup {
+  text-align: center;
+  width: 80%;
+  margin: 60px auto 0;
+}
+
+.login_btn, .send_email, .signup_btn{
+  width: 100%;
+  margin: 0 auto;
+  background: #F35F64;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.forgot_pass, .rem_pass{
+  display: block;
+  margin: 8px auto 0 auto;
+  font-size: 14px;
+  color: #F35F64;
+}
+
+/****   Text Input  - Email, text inputs *****/
+#input_text {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  height: 100%;
+  padding-top: 15px;
+  padding-bottom: 16px;
+}
+
+#input_email{
+    padding: 0px 10px 10px 10px;
+}
+
+/****   Search Input *****/
+#search_text{
+    box-shadow: none;
+    height: 35px;
+    padding-left: 50px;
+    border-radius: 7px;
+}
+
+/****   a href link with respective p tags *****/
+#psswd_link{
+    text-align: right;
+}
+
+#psswd_link a, #signup_link a{
+        color: #F35F64;
+        text-decoration: none;
+}
+
+
