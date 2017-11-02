@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/suchimani/Documents/Loyola/Fall 2017/COMP 422/TouristAttractionFinder/nearme/platforms/android/CordovaLib/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/suchimani/Documents/Loyola/Fall 2017/COMP 422/TouristAttractionFinder/nearme/platforms/android/CordovaLib/src/debug/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\sahmed\test\TouristAttractionFinder\nearme\platforms\android\CordovaLib\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\sahmed\test\TouristAttractionFinder\nearme\platforms\android\CordovaLib\src\debug\shaders"/></dataSet></merger>
