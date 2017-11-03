@@ -55,6 +55,70 @@
         <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <meta name = "viewport" content="initial-scale=1.0, user-scalable=no">
+    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places"></script>
+    </script>-->
+    
+        <style>
+            #map{
+                height: 50%;
+                /*margin: 0px;
+                padding: 0px;*/
+            }
+            html, body {
+                height: 50%%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+
+        <script>
+      var map;
+      var infowindow;
+      var service;
+      var marker = [];
+
+      function initMap() {
+        var pyrmont = {lat: -33.867, lng: 151.195};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: pyrmont,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: pyrmont,
+          radius: 3221,
+          type: ['store']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+    </script>
+
+
+
     </head>
 
     <body>
@@ -98,6 +162,37 @@
                         </p>
                     </div>
                 </ons-toolbar>
+
+                <ons-card>
+                    <!--<div id="map"></div>-->
+                        <!--<div style="width: 50%, height:200px">
+                            <div id="map" class="map">
+                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script>
+                            </div>
+                        </div>-->
+                    <!-- <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 100%">
+                    -->
+                    <div id="map" class="center">
+                        <p style=" margin-top: 10px;">
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script>
+                        </p>
+                    </div>
+                    <div class="title">
+                      Awesome framework
+                    </div>
+                    <div class="content">
+                      <div>
+                        <ons-button><ons-icon icon="ion-thumbsup"></ons-icon></ons-button>
+                        <ons-button><ons-icon icon="ion-share"></ons-icon></ons-button>
+                      </div>
+                      <ons-list>
+                        <ons-list-header>Bindings</ons-list-header>
+                        <ons-list-item>Vue</ons-list-item>
+                        <ons-list-item>Angular</ons-list-item>
+                        <ons-list-item>React</ons-list-item>
+                      </ons-list>
+                    </div>
+                </ons-card>
             </ons-page>
         </template>
 
@@ -143,7 +238,7 @@
                         <br><br>
                         <ons-button modifier="large" class="send_email" onclick="fn.load('about.html')">SEND EMAIL</ons-button>
                         <br><br>
-                        <ons-button modifier="quiet" class="rem_pass" onclick="fn.load('login.html')">I remembered my password!!</ons-button>
+                        <ons-button modifier="quiet" class="rem_pass" onclick="fn.load('about.html')">I remembered my password!!</ons-button>
                     </div>
                 </ons-page>
         </template>

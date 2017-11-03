@@ -1,5 +1,10 @@
 .toolbar--material{
-    background-color: #F35F64;
+    /*background-color: #F35F64;*/
+    background-color: #add8e6;
+}
+
+.card--material{
+    height: 100%;
 }
 
 /****   Buttons - Login, Forgot Password, Sign Up *****/
