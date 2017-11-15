@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.example.test;
+package com.example.nearme;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

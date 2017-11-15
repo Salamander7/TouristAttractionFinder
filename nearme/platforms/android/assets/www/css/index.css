@@ -1,3 +1,8 @@
+.page--material, .page--material__background{
+  background-color: #ffffff;
+}
+
+
 .toolbar--material{
     background-color: #F35F64;
 }
@@ -10,11 +15,21 @@
 }
 
 .login_btn, .send_email, .signup_btn{
-  width: 100%;
+  width: 50%;
   margin: 0 auto;
   background: #F35F64;
   font-weight: bold;
   font-size: 20px;
+  border-radius: 10px;
+}
+
+#close_btn_fgt, #signup_btn{
+  width: 30%;
+  margin: 0 auto;
+  background: #F35F64;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
 }
 
 .forgot_pass, .rem_pass{
@@ -25,7 +40,7 @@
 }
 
 /****   Text Input  - Email, text inputs *****/
-#input_text {
+#sgin_email, #sgin_passwd, #sgup_email, #sgup_passwd, #sgup_cnf_passwd {
   display: block;
   width: 100%;
   margin: 0 auto;
@@ -57,4 +72,11 @@
         text-decoration: none;
 }
 
+.dialog{
+  min-width: 350px;
+}
+
+:checked+.tabbar--material__button{
+  color: #F35F64;
+}
 

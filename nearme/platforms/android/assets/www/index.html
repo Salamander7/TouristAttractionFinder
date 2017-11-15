@@ -17,36 +17,6 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<!-- <html>
-    <head> -->
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-       <!--  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
-</html>-->
 
 <html>
     <head>
@@ -55,62 +25,53 @@
         <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<!--         <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+ --><!-- <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script> -->
+
     </head>
+    <script type="text/javascript">
+        
+        const config = {
+    apiKey:"AIzaSyCjXmF4Ft8K6NsEdy7aUTqZ2jiIkxAmTWU",
+    authDomain: "nearme-3f06a.firebaseapp.com",
+    databaseURL: "https://nearme-3f06a.firebaseio.com",
+    projectID: "nearme-3f06a",
+    storageBucket: "nearme-3f06a.appspot.com",
+    messagingSenderId: "446204670341"
+  }
+  firebase.initializeApp(config);
+    </script>
 
-    <body>
-        <!-- Side Splitter Menu -->
-            <ons-splitter>
-                <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
-                    <ons-page>
-                        <ons-list>
-                            <ons-list-item onclick="fn.load('about.html')" tappable>
-                                About
-                            </ons-list-item>
-                            <ons-list-item onclick="fn.load('settings.html')" tappable>
-                                Settings
-                            </ons-list-item>
-                            <ons-list-item onclick="fn.load('login.html')" tappable>
-                                Sign In
-                            </ons-list-item>
-                        </ons-list>
-                    </ons-page>
-                </ons-splitter-side>
-                <ons-splitter-content id="content" page="about.html">
-                    
-                </ons-splitter-content>
-            </ons-splitter>
+    <body onload="remove_element()">
+        <!-- Tab Bar Menu -->
+            <ons-tabbar  id="tab_bar" swipeable position="auto">
+                    <ons-tab page="home.html" id="tab1"  icon="ion-home, material:md-home" active>
+                    </ons-tab>
 
-        <!-- Splitter Pages -->
-        <template id="about.html">
+                    <ons-tab page="about.html" id="tab2"  icon="ion-information-circled" >
+                    </ons-tab>
+
+                    <ons-tab page="login.html" id="tab3" icon="ion-log-in" >
+                    </ons-tab>
+              </ons-tabbar>
+
+        <!-- Pages -->
+
+        <template id="home.html">
             <ons-page>
-                <ons-toolbar>
-                    <div class="left">
-                        <ons-toolbar-button onclick="fn.open()">
-                                <ons-icon icon="md-menu"></ons-icon>
-                        </ons-toolbar-button>
-                    </div>
-                    
-                    <div class="center"> 
-                        <p style=" margin-top: 10px;">
-                            <ons-search-input class="search_btn" placeholder="Enter Zip Code">
-                                <input id="search_text" type="search" class="search-input search-input--material">
-                            </ons-search-input>
-                        </p>
-                    </div>
-                </ons-toolbar>
+                HOME
             </ons-page>
         </template>
 
-        <template id="settings.html">
+        <template id="about.html">
             <ons-page>
-                <ons-toolbar>
-                    <div class="left">
-                        <ons-toolbar-button onclick="fn.open()">
-                            <ons-icon icon="md-menu"></ons-icon>
-                        </ons-toolbar-button>
-                    </div>
-                    <div class="center"> Settings </div>
-                </ons-toolbar>
+                ABOUT
                 
             </ons-page>
         </template>
@@ -118,46 +79,54 @@
         <template id="login.html">
                 <ons-page>
                    <div class="login">
-                        <img src="img/rsz_1nearme.png">
-                        <input id="input_text" type="email" class="text-input--underbar" placeholder="Email" value="">
-                        <input id="input_text" type="password" class="text-input--underbar" placeholder="Password" value="">
+                        <img src="img/rsz_1nearme.png"><br><br><br>
+                        <input id="sgin_email" type="email" class="text-input--underbar" placeholder="Email" value="">
+                        <input id="sgin_passwd" type="password" class="text-input--underbar" placeholder="Password" value="">
                         <br><br>
-                        <ons-button modifier="large" class="login_btn" onclick="fn.load('about.html')">LOG IN</ons-button>
+                        <ons-button modifier="large" class="login_btn" onclick="signin_action()">LOG IN</ons-button>
                         <p id="psswd_link">
-                            <a href="#" onclick="fn.load('forgotpswd.html')" >Forgot Password?</a>
+                            <a href="#" onclick="showDialog('forgot_password')" >Forgot Password?</a>
                         </p>
                         <br>
                         <p id="signup_link">
-                            Do not have an account?   <a href="#" onclick="fn.load('signup.html')" >Sign Up</a>
+                            Do not have an account?   <a href="#" onclick="showDialog('signup')" >Sign Up</a>
                         </p>
                     </div>
                 </ons-page>
         </template>
 
-
-        <template id="forgotpswd.html">
+         <template id="settings.html">
                 <ons-page>
-                   <div class="forgotpswd">
-                        <img src="img/rsz_1nearme.png">
-                        <input id="input_email" type="email" class="text-input--underbar" placeholder="Email" value="">
-                        <br><br>
-                        <ons-button modifier="large" class="send_email" onclick="fn.load('about.html')">SEND EMAIL</ons-button>
-                        <br><br>
-                        <ons-button modifier="quiet" class="rem_pass" onclick="fn.load('login.html')">I remembered my password!!</ons-button>
-                    </div>
+                   SETTINGS
                 </ons-page>
         </template>
 
-        <template id="signup.html">
-                <ons-page>
-                   <div class="signup">
+        <ons-dialog id="forgot_password">
+            <div style="text-align: center; padding: 10px;">
+                <p>
+                    <h4>Reset Forgotten Password</h4><br>
+                    <input id="fgt_email" type="email" class="text-input--underbar" placeholder="Email" value=""><br><br>
+                    <ons-button id="close_btn_fgt" onclick="hideDialog('forgot_password','close_btn_fgt')">SEND</ons-button><br><br>
+                    <ons-button modifier="quiet" id="no_id" class="rem_pass" onclick="hideDialog('forgot_password','no_id')">I remembered my password!!</ons-button>
+                <p>
+            </div>
+        </ons-dialog>
+
+       <ons-dialog id="signup">
+            <div style="text-align: center; padding: 10px;">
                         <img src="img/rsz_1nearme.png">
-                        <input id="input_text" type="email" class="text-input--underbar" placeholder="Email" value="">
-                        <input id="input_text" type="password" class="text-input--underbar" placeholder="Create a Password" value="">
-                        <input id="input_text" type="password" class="text-input--underbar" placeholder="Confirm Password" value="">
+                        <input id="sgup_email" type="email" class="text-input--underbar" placeholder="Email" value="">
+                        <input id="sgup_passwd" type="password" class="text-input--underbar" placeholder="Create a Password" value="">
+                        <input id="sgup_cnf_passwd" type="password" class="text-input--underbar" placeholder="Confirm Password" value="">
                         <br><br>
-                        <ons-button modifier="large" class="signup_btn" onclick="fn.load('about.html')">SIGN UP</ons-button>
-                    </div>
+                        <ons-button modifier="large" class="signup_btn" onclick="hideDialog('signup','signup_btn')">SIGN UP</ons-button>
+            </div>
+        </ons-dialog>
+
+
+        <template id="logout.html">
+                <ons-page>
+                   LOGOUT
                 </ons-page>
         </template>
     </body>
