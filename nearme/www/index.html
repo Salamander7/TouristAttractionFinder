@@ -57,22 +57,158 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <meta name = "viewport" content="initial-scale=1.0, user-scalable=no">
     <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places"></script>
-    </script>-->
+	</script>-->
     
-        <style>
-            #map{
-                height: 50%;
-                /*margin: 0px;
-                padding: 0px;*/
-            }
-            html, body {
-                height: 50%%;
-                margin: 0;
-                padding: 0;
-            }
-        </style>
+
 
         <script>
+
+
+/*
+        var startLatLng, //change this to some value near to where the map will end up
+        allMarkers = [], //keep a global copy of your markers
+        mapPointsBounds = [], //map bounds of all markers
+        map; //copy of the map
+
+    //Google will call this when it's ready, it's a query string in the script tag above `&callback=initMap`:
+    function initMap() {
+        startLatLng = new google.maps.LatLng([41.880, 87.631]);
+        mapPointsBounds = new google.maps.LatLngBounds();
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: startLatLng,
+            zoom: 15
+        });
+
+        service.nearbySearch({
+          location: startLatLng,
+          radius: 3221,
+          type: ['point_of_interest']
+        }, function(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                //for each result in results.length ++
+                for (var i = 0; i < results.length; i++) {
+                    //here I'm just setting the names from the variables into a list, to display the names as I show in (Figure 1).
+                    var item = document.createElement('li');
+                    item.appendChild(document.createTextNode(results[i].name));
+                    document.getElementById('results').appendChild(item);
+                    
+                    //Change this function name to "addMapMarker", send in the results object
+                    addMapMarker(results[i], i);
+                }
+
+                //finally, fitBounds on map to set zoom and center:
+                map.fitBounds(mapPointsBounds);
+            }
+        });
+    }
+
+    //I would change the name of this function to "addMapMarker" or something similar
+    function addMapMarker(markerInfo, i) {
+        //why are you initializing "i" again if you're passing it in?
+        var infowindow = new google.maps.InfoWindow(), marker; //, i;
+        var service = new google.maps.places.PlacesService(map);
+
+        var marker;
+
+
+        //this is where the marker is created with position and animation
+        marker = new google.maps.Marker({
+            //animation: google.maps.Animation.DROP,
+            position: markerInfo.geometry.location,
+            map: map,
+            markerInfo: markerInfo //you can store anything in the map point
+        });
+
+        allMarkers.push(marker); //keeping all markers in an array
+        mapPointsBounds.extend(markerInfo.geometry.location); //extend bounds to contain this marker
+
+
+        //this is the info if you click the marker
+        //you're running a function, then returning a function... just put a simple function here:
+        google.maps.event.addListener(marker, 'click', function (marker, i) {
+            //return function() {
+            infowindow.setContent('<div><strong>' + marker.markerInfo.name + '</strong><br>' + 'Place ID: ' + marker.markerInfo.place_id + '<br>' + marker.markerInfo.formatted_address + '</div>');
+            infowindow.open(map, marker);
+            //}
+        });
+    }*/
+
+
+/*//Testing the Angular with #wrapper?
+var grocery_list = { //this is dictionary that "stores" the data 
+//(result, location name, location id, etc)
+  "Banana": { category: "produce", price: 5.99 },
+  "Chocolate": { category: "candy", price: 2.75 },
+  "Wheat Bread": { category: "grains and breads", price: 2.99 }
+}
+
+var wrapper = $('#wrapper'), container;
+for (var key in grocery_list){
+    container = $('<div id="grocery_item" class="container"></div>');
+    wrapper.append(container);
+    container.append('<div class="item">' + key +'</div>');
+    container.append('<div class="category">' + grocery_list[key].category +'</div>');
+    container.append('<div class="price">' + grocery_list[key].price +'</div>');
+}*/
+/*
+var onsItem = document.createElement('ons-list-item');
+       onsItem.setAttribute('modifier', "chevron");
+      // onsItem.setAttribute('onclick', "functionName()");
+       //onsItem.innerHTML = '<img src="" alt="something here" />';
+document.getElementById('listIDorSomething').appendChild(onsItem);
+
+
+var questions = [
+		{
+			title: "Heyo",
+			answer: ["body"],
+			correct: 1
+		}
+		{
+			title: "Heyo",
+			answer: ["body"],
+			correct: 2
+		}
+		{
+			title: "Heyo",
+			answer: ["body"],
+			correct: 3
+		},
+	];
+
+	var score = 0;
+	var current = 0;
+
+	document.addEventListener("init", function(event)) {
+		var page = event.target;
+		if(page.id === "question-page") {
+			var title = "yes" + (current+1) + "ArrayData:" + questions[current].title;
+			page.querySelector("#title").textContent = title;
+
+			var btns = page.querySelectorAll(".btn");
+			btns.forEach(function(target,index){
+				target.textContent = questions[current].answer[index];
+			})
+		}
+	}*/</script>
+
+
+    
+    	<style>
+    		#map{
+    			height: 50%;
+    			/*margin: 0px;
+    			padding: 0px;*/
+    		}
+    		html, body {
+    			height: 50%%;
+    			margin: 0;
+    			padding: 0;
+    		}
+    	</style>
+
+    	<script>
       var map;
       var infowindow;
       var service;
@@ -164,35 +300,35 @@
                 </ons-toolbar>
 
                 <ons-card>
-                    <!--<div id="map"></div>-->
-                        <!--<div style="width: 50%, height:200px">
-                            <div id="map" class="map">
-                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script>
-                            </div>
-                        </div>-->
-                    <!-- <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 100%">
-                    -->
-                    <div id="map" class="center">
+                	<!--<div id="map"></div>-->
+                	    <!--<div style="width: 50%, height:200px">
+                	    	<div id="map" class="map">
+                	    		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script>
+                	    	</div>
+                	    </div>-->
+                	<!-- <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 100%">
+                	-->
+                	<div id="map" class="center">
                         <p style=" margin-top: 10px;">
-                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script>
+                        	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script>
                         </p>
                     </div>
                     <div class="title">
-                      Awesome framework
-                    </div>
-                    <div class="content">
-                      <div>
-                        <ons-button><ons-icon icon="ion-thumbsup"></ons-icon></ons-button>
-                        <ons-button><ons-icon icon="ion-share"></ons-icon></ons-button>
-                      </div>
-                      <ons-list>
-                        <ons-list-header>Bindings</ons-list-header>
-                        <ons-list-item>Vue</ons-list-item>
-                        <ons-list-item>Angular</ons-list-item>
-                        <ons-list-item>React</ons-list-item>
-                      </ons-list>
-                    </div>
-                </ons-card>
+				      Awesome framework
+				    </div>
+				    <div class="content">
+				      <div>
+				        <ons-button><ons-icon icon="ion-thumbsup"></ons-icon></ons-button>
+				        <ons-button><ons-icon icon="ion-share"></ons-icon></ons-button>
+				      </div>
+				      <ons-list>
+				        <ons-list-header>Bindings</ons-list-header>
+				        <ons-list-item>Vue</ons-list-item>
+				        <ons-list-item>Angular</ons-list-item>
+				        <ons-list-item>React</ons-list-item>
+				      </ons-list>
+				    </div>
+   				</ons-card>
             </ons-page>
         </template>
 
