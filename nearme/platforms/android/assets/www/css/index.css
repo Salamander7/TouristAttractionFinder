@@ -7,6 +7,25 @@
     background-color: #F35F64;
 }
 
+.card--material{
+    height: 100%;
+}
+
+.list__content::-webkit-scrollbar,
+::-webkit-scrollbar {
+  display: block;
+  background-color: white;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #666;
+  border: 1px solid white;
+}
+
+
 /****   Buttons - Login, Forgot Password, Sign Up *****/
 .login, .forgotpswd, .signup {
   text-align: center;

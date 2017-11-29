@@ -16,61 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-// var app = {
-    // Application Constructor
-    // initialize: function() {
-    //     document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    // },
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    // onDeviceReady: function() {
-    //     this.receivedEvent('deviceready');
-    // },
-
-    // Update DOM on a Received Event
-//     receivedEvent: function(id) {
-//         var parentElement = document.getElementById(id);
-//         var listeningElement = parentElement.querySelector('.listening');
-//         var receivedElement = parentElement.querySelector('.received');
-
-//         listeningElement.setAttribute('style', 'display:none;');
-//         receivedElement.setAttribute('style', 'display:block;');
-
-//         console.log('Received Event: ' + id);
-//     }
-// };
-
-// app.initialize();
-
-// (function(){
-//   const config = {
-//     apiKey:"AIzaSyCjXmF4Ft8K6NsEdy7aUTqZ2jiIkxAmTWU",
-//     authDomain: "nearme-3f06a.firebaseapp.com",
-//     databaseURL: "https://nearme-3f06a.firebaseio.com",
-//     projectID: "nearme-3f06a",
-//     storageBucket: "nearme-3f06a.appspot.com",
-//     messagingSenderId: "446204670341"
-//   }
-//   firebase.initializeApp(config);
-// }());
-
+//Method for Sign In
 function signin_action(){
+  //Get the values
   const sgin_email = document.getElementById('sgin_email').value;
   const sgin_psswd = document.getElementById('sgin_passwd').value;
 
-
+  //Call the signInWithEmailAndPassword of Firebase
   firebase.auth().signInWithEmailAndPassword(sgin_email, sgin_psswd).then(function(user) {
       // user signed in
       alert("Sign in");
       success_signin(user);
 
   }).catch(function(error) {
-    var errorCode = error.code;
+    //Error Handling
+      var errorCode = error.code;
       var errorMessage = error.message;
-      if (errorCode === 'auth/wrong-password') {
+      if(sgin_email==''){
+         alert('Your email is empty');
+      }else if(sgin_psswd == ''){
+          alert('Your password is empty');
+      }else if (errorCode === 'auth/wrong-password') {
           alert('You have entered a wrong password');
       } else if (errorCode === 'auth/invalid-email'){
           alert('You have entered a wrong email');
@@ -86,6 +53,8 @@ function signin_action(){
   });
 }
 
+//After Success Sign in
+//Add new tab bars and remove login
 function success_signin(userid){
   firebase.auth().onAuthStateChanged(function(userid) {
   if (userid) {
@@ -95,95 +64,95 @@ function success_signin(userid){
       $('.tabbar').append($tab);
       $('#tab4').attr('icon','ion-settings');
       $('#tab5').attr('icon','ion-log-out');
+      $('#tab5').attr('onclick','logout()');
       document.getElementById('tab_bar').setActiveTab(0);
 
-  } else {
+  }else{
     // No user is signed in.
   }
 });
-
 }
+
 
 function remove_element(){
   $('.tabbar__border').remove();
 }
 
+// Show Dialog for sign in, password recovery
 function showDialog(id) {
   document.getElementById(id).show();
 };
 
-
+//Hide the dialogs opened
 function hideDialog(id1 , id2) {
+
+  //For Send button in Forgot Password
   if(id2 =="close_btn_fgt"){
-    const forgot_email = document.getElementById('fgt_email').value;
+    const forgot_email = document.getElementById('fgt_email').value; // Get values
+
+    //Call the sendPasswordResetEmail of Firebase for password reset
     firebase.auth().sendPasswordResetEmail(forgot_email).then(function() {
-        // Email sent.
+        // Email sent hide the dialog
         document.getElementById(id1).hide();
     }).catch(function(error) {
-        // An error happened.
-        var errorCode = error.code;
+        // Error Messages.
+          var errorCode = error.code;
          var errorMessage = error.message;
          if (errorCode === 'auth/invalid-email'){
-          alert('You have entered a wrong email');
-        }else{
+            alert('You have entered a wrong email');
+         }else{
             alert(errorCode);
-        }
+         }
     });
-  }else if(id2 == 'signup_btn'){
+  }else if(id2 == 'signup_btn'){  //For sign up button in Sign up
+    //Get the values
     const sgup_email = document.getElementById('sgup_email').value;
     const sgup_passwd = document.getElementById('sgup_passwd').value;
     const sgup_cnf_passwd = document.getElementById('sgup_cnf_passwd').value;
 
+    email_validate(sgup_email);//Email Validation
 
-    email_validate(sgup_email);
+    //Password Validation
     if((sgup_passwd == "") || (sgup_cnf_passwd == "")){
-      alert("Passwords cannot be empty");
-  }else {
+        alert("Passwords cannot be empty");
+    }else {
       if((sgup_passwd.length > 6) && (sgup_cnf_passwd.length > 6)){
-        if(sgup_passwd == sgup_cnf_passwd) {
-            signup(sgup_email,sgup_passwd);
-            document.getElementById(id1).hide();
-        }else{
+          if(sgup_passwd == sgup_cnf_passwd) {
+              signup(sgup_email,sgup_passwd);
+              document.getElementById(id1).hide();
+          }else{
             alert("Password Mismatch");
-        }
-
-    }else{
-      alert("Password should be more than 6 characters");
+          }
+      }else{
+          alert("Password should be more than 6 characters");
+      }
     }
   }
-    
-  }
-
-  else{
+  else{//Hide the dialog if nothing selected
     document.getElementById(id1).hide();
   }
 }
 
-
+//Sign Up Method
 function signup(email, password){
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
-        // Email sent.
-        alert("success1")
-        email_verification();
-       // document.getElementById(id1).hide();
+        email_verification();//Email Verification
     }).catch(function(error) {
-        // An error happened.
-        var errorCode = error.code;
-         var errorMessage = error.message;
-         if (errorCode === 'auth/invalid-email'){
-          alert('You have entered a wrong email');
-        }else if(errorCode =='auth/email-already-in-use'){
-            alert('Email already exists');
-        }
-
-        else{
+        // Error Handling
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode === 'auth/invalid-email'){
+              alert('You have entered a wrong email');
+          }else if(errorCode =='auth/email-already-in-use'){
+              alert('Email already exists');
+          }else{
             alert(errorCode);
-        }
+          }
     });
 }
 
+//Email Validation Function
 function email_validate(email){
-
   var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
   if(regMail.test(email) == false){
       alert("Email address is not valid yet.");
@@ -192,56 +161,71 @@ function email_validate(email){
   }
 }
 
+//Firebase Email Verification
 function email_verification(){
   firebase.auth().currentUser.sendEmailVerification().then(function() {
     alert("Redirect");
     //redirect_app();
-  // Email sent.
 }).catch(function(error) {
-  // An error happened.
-  var errorCode = error.code;
+        // Error Handling
+         var errorCode = error.code;
          var errorMessage = error.message;
          if (errorCode === 'auth/invalid-email'){
-          alert('You have entered a wrong email');
-        }else if(errorCode =='auth/email-already-in-use'){
+            alert('You have entered a wrong email');
+          }else if(errorCode =='auth/email-already-in-use'){
             alert('Email already exists');
-        }
-
-        else{
+          }else{
             alert(errorCode);
         }
-});  
+  });  
 }
 
 
-function redirect_app(){
-  var actionCodeSettings = {
-  url: 'https://www.example.com/?email=' + firebase.auth().currentUser.email,
-  android: {
-    packageName: 'com.example.nearme',
-    installApp: true,
-    minimumVersion: '12'
-  },
-  handleCodeInApp: true
-};
-firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
-  .then(function() {
-    // Verification email sent.
-  })
-  .catch(function(error) {
-    var errorCode = error.code;
-         var errorMessage = error.message;
-         if (errorCode === 'auth/invalid-email'){
-          alert('You have entered a wrong email');
-        }else if(errorCode =='auth/email-already-in-use'){
-            alert('Email already exists');
-        }
+//Logout Function
+function logout(){
 
-        else{
-            alert(errorCode);
-        }
-    // Error occurred. Inspect error.code.
-  });
+  //After logging out, add login tab and remove added new tabs
+  var child1 = document.getElementById('tab4');
+  child1.parentNode.removeChild(child1);
+
+  var child2 = document.getElementById('tab5');
+  child2.parentNode.removeChild(child2);
+
+  var $tab = $("<ons-tab page='login.html'  id='tab3'  ></ons-tab>");
+  $('.tabbar').append($tab);
+  $('#tab3').attr('icon','ion-log-in');
+  document.getElementById('tab_bar').setActiveTab(0);
+
 }
 
+
+// function redirect_app(){
+//   var actionCodeSettings = {
+//   url: 'https://www.example.com/?email=' + firebase.auth().currentUser.email,
+//   android: {
+//     packageName: 'com.example.nearme',
+//     installApp: true,
+//     minimumVersion: '12'
+//   },
+//   handleCodeInApp: true
+// };
+// firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
+//   .then(function() {
+//     // Verification email sent.
+//   })
+//   .catch(function(error) {
+//     var errorCode = error.code;
+//          var errorMessage = error.message;
+//          if (errorCode === 'auth/invalid-email'){
+//           alert('You have entered a wrong email');
+//         }else if(errorCode =='auth/email-already-in-use'){
+//             alert('Email already exists');
+//         }
+
+//         else{
+//             alert(errorCode);
+//         }
+//     // Error occurred. Inspect error.code.
+//   });
+// }
 
