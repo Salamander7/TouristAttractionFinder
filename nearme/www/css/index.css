@@ -25,6 +25,15 @@
   border: 1px solid white;
 }
 
+.content {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  max-height: 30%;
+  overflow: auto;
+  bottom: 0; //or top: 0;
+  background: rgba(0,0,0,.2);
+}
 
 /****   Buttons - Login, Forgot Password, Sign Up *****/
 .login, .forgotpswd, .signup {

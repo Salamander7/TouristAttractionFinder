@@ -83,21 +83,10 @@
 
         <template id="about.html">
             <ons-page id="question-page">
-                <!-- <ons-toolbar>
-                    <div class="center"> 
-                        <p style=" margin-top: 10px;">
-                            <ons-search-input class="search_btn" placeholder="Enter Zip Code">
-                                <input id="search_text" type="search" class="search-input search-input--material">
-                            </ons-search-input>
-                        </p>
-                    </div>
-                </ons-toolbar> -->
-
                 <ons-card>
                     <div id="map_canvas" class="center">
                         <p style=" margin-top: 10px;">
                             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places,geometry&callback=initialize" async defer></script>
-                            <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script> -->
                         </p>
                     </div>
                     <div id="keywordField" class="title">
@@ -123,15 +112,8 @@
                     </div>
                     
                     <div class="content">
-                        <ons-scroller style="height: 200px">
-                            <ons-list>
-                                <ons-list-item modifier="longdivider">
-                                    <div id="listing">
-                                        <table id="resultsTable">
-                                            <tbody id="results"></tbody>
-                                        </table>
-                                    </div>
-                                </ons-list-item>
+                        <ons-scroller>
+                            <ons-list id="results">
                             </ons-list>
                         </ons-scroller>
                     </div>

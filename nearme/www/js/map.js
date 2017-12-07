@@ -125,23 +125,31 @@
   }
 
   function addResult(result, i, distance) {
+
       var results = document.getElementById('results');
-      var tr = document.createElement('tr');
-      tr.style.backgroundColor = (i % 2 == 0 ? '#F0F0F0' : '#FFFFFF');
-      tr.onclick = function () {
-          google.maps.event.trigger(markers[i], 'click');
-      };
-
-
-      var nameTd = document.createElement('td');
+      //var tr = document.createElement('tr');
+      var onsItem = document.createElement('ons-list-item');
+      onsItem.onclick = function () {
+           google.maps.event.trigger(markers[i], 'click');
+       };
 
       var name = document.createTextNode(result.name + ' - ' + distance + ' mi');
 
-      nameTd.appendChild(name);
+      onsItem.appendChild(name);
+      document.getElementById('results').appendChild(onsItem);
 
-      tr.appendChild(nameTd);
-      results.appendChild(tr);
+      //document.querySelector('#question-page').onInfiniteScroll = addItems(name);
+
   }
+  function addItems(name) {
+
+      for(var y=0; y < 4; y++) {
+            onsItem.appendChild(name);
+            document.getElementById('results').appendChild(onsItem);
+          }
+  }
+
+
 
   function clearResults() {
       var results = document.getElementById('results');
