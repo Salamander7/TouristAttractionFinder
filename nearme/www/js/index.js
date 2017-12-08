@@ -37,7 +37,7 @@ function signin_action(){
   //Call the signInWithEmailAndPassword of Firebase
   firebase.auth().signInWithEmailAndPassword(sgin_email, sgin_psswd).then(function(user) {
       // user signed in
-      alert("Sign in");
+      // alert("Sign in");
       success_signin(user);
 
   }).catch(function(error) {
@@ -131,7 +131,7 @@ function signup(email, password,userid){
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
         email_verification();//Email Verification
         var user = firebase.auth().currentUser;
-        alert(user);
+        // alert(user);
         success_signin(user);
         writeUserData(email,password,userid,user.uid);
     }).catch(function(error) {
@@ -182,7 +182,7 @@ function email_verification(){
 //Add new tab bars and remove login
 function success_signin(userid){
   firebase.auth().onAuthStateChanged(function(userid) {
-    alert("success");
+    // alert("success");
   if (userid) {
       var child = document.getElementById('tab3');
       child.parentNode.removeChild(child);
