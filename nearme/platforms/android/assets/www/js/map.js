@@ -125,23 +125,30 @@
   }
 
   function addResult(result, i, distance) {
+
       var results = document.getElementById('results');
-      var tr = document.createElement('tr');
-      tr.style.backgroundColor = (i % 2 == 0 ? '#F0F0F0' : '#FFFFFF');
-      tr.onclick = function () {
-          google.maps.event.trigger(markers[i], 'click');
-      };
-
-
-      var nameTd = document.createElement('td');
+      //var tr = document.createElement('tr');
+      var onsItem = document.createElement('ons-list-item');
+      onsItem.onclick = function () {
+           google.maps.event.trigger(markers[i], 'click');
+       };
 
       var name = document.createTextNode(result.name + ' - ' + distance + ' mi');
+      onsItem.appendChild(name);
+      document.getElementById('results').appendChild(onsItem);
 
-      nameTd.appendChild(name);
+      //document.querySelector('#question-page').onInfiniteScroll = addItems(name);
 
-      tr.appendChild(nameTd);
-      results.appendChild(tr);
   }
+  function addItems(name) {
+
+      for(var y=0; y < 4; y++) {
+            onsItem.appendChild(name);
+            document.getElementById('results').appendChild(onsItem);
+          }
+  }
+
+
 
   function clearResults() {
       var results = document.getElementById('results');
@@ -179,7 +186,7 @@
       content += '<table>';
       content += '<tr class="iw_table_row">';
       content += '<td style="text-align: right"><img class="hotelIcon" src="' + place.photos[0].getUrl({ 'maxWidth': 50, 'maxHeight': 50 }) + '"/></td>';
-      content += '<td><b><a href="' + place.url + '">' + place.name + '</a></b></td></tr>';
+      content += '<td id="link"><b><a href="' + place.url + '">' + place.name + '</a></b></td></tr>';
       content += '<tr class="iw_table_row"><td class="iw_attribute_name">Address:</td><td>' + place.vicinity + '</td></tr>';
       if (place.formatted_phone_number) {
           content += '<tr class="iw_table_row"><td class="iw_attribute_name">Telephone:</td><td>' + place.formatted_phone_number + '</td></tr>';
@@ -204,7 +211,9 @@
           }
           content += '<tr class="iw_table_row"><td class="iw_attribute_name">Website:</td><td><a href="' + fullUrl + '">' + website + '</a></td></tr>';
       }
+      // content += '<tr class="iw_table_row"><td class="iw_attribute_name">Favorite:</td><td></td></tr>';
       content += '</table>';
+      content += '<button class="fav-btn"><span href="" class="favme dashicons dashicons-heart"></span></button>';
       return content;
   }
 

@@ -4,7 +4,7 @@
 
 
 .toolbar--material{
-    background-color: #F35F64;
+    background-color: #4e92df;
 }
 
 .card--material{
@@ -36,16 +36,16 @@
 }
 
 /****   Buttons - Login, Forgot Password, Sign Up *****/
-.login, .forgotpswd, .signup {
+.login, .forgotpswd, .signup, .password {
   text-align: center;
   width: 80%;
   margin: 60px auto 0;
 }
 
-.login_btn, .send_email, .signup_btn{
-  width: 50%;
+.login_btn, .send_email, .signup_btn, .passwd_btn, .email_btn{
+  width: 40%;
   margin: 0 auto;
-  background: #F35F64;
+  background: #4e92df;
   font-weight: bold;
   font-size: 20px;
   border-radius: 10px;
@@ -54,7 +54,7 @@
 #close_btn_fgt, #signup_btn{
   width: 30%;
   margin: 0 auto;
-  background: #F35F64;
+  background: #4e92df;
   font-weight: bold;
   font-size: 20px;
   border-radius: 10px;
@@ -64,11 +64,11 @@
   display: block;
   margin: 8px auto 0 auto;
   font-size: 14px;
-  color: #F35F64;
+  color: #4e92df;
 }
 
 /****   Text Input  - Email, text inputs *****/
-#sgin_email, #sgin_passwd, #sgup_email, #sgup_passwd, #sgup_cnf_passwd {
+#sgin_email, #sgin_passwd, #sgup_email, #sgup_passwd, #sgup_cnf_passwd, #newpswd, #cnfpswd, #sgup_userid, #keyword, #updemail{
   display: block;
   width: 100%;
   margin: 0 auto;
@@ -76,6 +76,14 @@
   height: 100%;
   padding-top: 15px;
   padding-bottom: 16px;
+}
+
+#keyword{
+      padding-bottom: 3px;
+}
+
+#sgup_email, #sgup_passwd, #sgup_cnf_passwd,  #sgup_userid{
+  width: 80%;
 }
 
 #input_email{
@@ -96,15 +104,107 @@
 }
 
 #psswd_link a, #signup_link a{
-        color: #F35F64;
+        color: #4e92df;
         text-decoration: none;
 }
 
 .dialog{
   min-width: 350px;
+  border-radius: 20px;
+}
+
+.tabbar--material{
+  background-color: #4e92df;
+}
+.ons-icon{
+      font-size: 30px
+}
+
+.tabbar--material__button{
+  color: #000;
 }
 
 :checked+.tabbar--material__button{
-  color: #F35F64;
+  color: #ffffff;
 }
 
+.text-input--underbar, .text-input--underbar:invalid{
+      border-bottom: 3px solid #4e92df;
+}
+
+#fgt_email {
+    width: 80%;
+}
+
+.close{
+      background: none;
+    color: #4e92df;
+    border: none;
+    box-shadow: none;
+    float: right;
+    padding: 0px 0px 0px 0px;
+}
+
+#signup{
+  min-width: 300px;
+}
+
+.list-item {
+    width: 80%;
+    border-bottom:1px solid;
+}
+
+.list-item--material {
+    border-bottom: 1px solid black;
+    padding: 0px 0 0 0px;
+    line-height: normal;
+    margin: 0px 0px 0px 20px;
+}
+
+h2{
+  color:black;
+}
+
+.logo{
+  text-align: center;
+}
+
+.back-button--material__icon{
+  fill:white;
+  font-weight: bold;
+}
+
+.toolbar--material__center{
+  color :white;
+}
+
+#typeLabel, #type, #rankByLabel,#rankBy{
+  padding: 10px 5px 0px 0px;
+  float:left;
+}
+
+.select-input{
+  padding: 0px;
+}
+
+#type,#rankBy{
+  padding:5px 0px 0px 0px;
+}
+
+.select-input--material, .select-input--material__label{
+  width: 85%;
+}
+
+.header-part {
+    text-align: center;
+}
+
+#favpng{
+ width: 20px;
+ height: 20px;
+}
+
+#profile{
+  background: none;
+  box-shadow: none;
+}

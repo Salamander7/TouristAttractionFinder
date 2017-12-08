@@ -134,7 +134,6 @@
        };
 
       var name = document.createTextNode(result.name + ' - ' + distance + ' mi');
-
       onsItem.appendChild(name);
       document.getElementById('results').appendChild(onsItem);
 
@@ -187,7 +186,7 @@
       content += '<table>';
       content += '<tr class="iw_table_row">';
       content += '<td style="text-align: right"><img class="hotelIcon" src="' + place.photos[0].getUrl({ 'maxWidth': 50, 'maxHeight': 50 }) + '"/></td>';
-      content += '<td><b><a href="' + place.url + '">' + place.name + '</a></b></td></tr>';
+      content += '<td id="link"><b><a href="' + place.url + '">' + place.name + '</a></b></td></tr>';
       content += '<tr class="iw_table_row"><td class="iw_attribute_name">Address:</td><td>' + place.vicinity + '</td></tr>';
       if (place.formatted_phone_number) {
           content += '<tr class="iw_table_row"><td class="iw_attribute_name">Telephone:</td><td>' + place.formatted_phone_number + '</td></tr>';
@@ -213,6 +212,7 @@
           content += '<tr class="iw_table_row"><td class="iw_attribute_name">Website:</td><td><a href="' + fullUrl + '">' + website + '</a></td></tr>';
       }
       content += '</table>';
+      content += '<button class="fav-btn"><span href="" class="favme dashicons dashicons-heart"></span></button>';
       return content;
   }
 

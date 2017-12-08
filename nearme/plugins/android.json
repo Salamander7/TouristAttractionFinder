@@ -1,21 +1,24 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.example.test"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.example.test"
     },
-    "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.example.test"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.example.test"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.example.test"
-        }
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.example.test"
     },
-    "dependent_plugins": {}
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.example.nearme"
+    }
+  },
+  "dependent_plugins": {}
 }

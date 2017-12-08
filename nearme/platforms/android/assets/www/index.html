@@ -1,23 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
@@ -58,53 +39,49 @@
     messagingSenderId: "446204670341"
   }
   firebase.initializeApp(config);
+
+var database = firebase.database();
     </script>
 
     <body onload="remove_element()">
         <!-- Tab Bar Menu -->
-            <ons-tabbar  id="tab_bar" swipeable position="auto">
+        <ons-navigator id="myNavigator">
+            <ons-page>
+                <ons-tabbar  id="tab_bar" swipeable position="auto">
                     <ons-tab page="home.html" id="tab1"  icon="ion-home, material:md-home" active>
                     </ons-tab>
 
-                    <ons-tab page="about.html" id="tab2"  icon="ion-information-circled" >
-                    </ons-tab>
+                    <!-- <ons-tab page="about.html" id="tab2"  icon="ion-information-circled" >
+                    </ons-tab> -->
 
                     <ons-tab page="login.html" id="tab3" icon="ion-log-in">
                     </ons-tab>
-              </ons-tabbar>
+                </ons-tabbar>
+            </ons-page>
+        </ons-navigator>
 
         <!-- Pages -->
 
-        <template id="home.html">
+        <!-- <template id="home.html">
             <ons-page>
                 HOME
             </ons-page>
-        </template>
+        </template> -->
 
-        <template id="about.html">
+        <template id="home.html">
             <ons-page id="question-page">
-                <!-- <ons-toolbar>
-                    <div class="center"> 
-                        <p style=" margin-top: 10px;">
-                            <ons-search-input class="search_btn" placeholder="Enter Zip Code">
-                                <input id="search_text" type="search" class="search-input search-input--material">
-                            </ons-search-input>
-                        </p>
-                    </div>
-                </ons-toolbar> -->
-
                 <ons-card>
                     <div id="map_canvas" class="center">
                         <p style=" margin-top: 10px;">
                             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places,geometry&callback=initialize" async defer></script>
-                            <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlEtMTdOH9aUMKZat9JZf9d6Nw6qj5mVc&libraries=places&callback=initMap" async defer></script> -->
                         </p>
                     </div>
                     <div id="keywordField" class="title">
-                      <p style="font-size:10px;">By Keyword:</p><input id="keyword" type="text" value="" />
+                      <input id="keyword" type="text" class="text-input--underbar" placeholder="Search by Keyword" value=""/>
                     </div>
-                    <div id="controls"> <span id="typeLabel">Type: </span>
-                        <select id="type">
+                    <div id="controls"> 
+                        <label id="typeLabel">Type: </label>
+                        <ons-select id="type">
                             <option value="bar">Bars</option>
                             <option value="cafe">Cafe</option>
                             <option value="clothing_store">Clothing store</option>
@@ -113,25 +90,18 @@
                             <option value="park">Park</option>
                             <option value="casino">Casino</option>
                             <option value="point_of_interest">Point of Interest</option>
-                        </select> 
-                        <span id="rankByLabel"> Rank by: </span>
+                        </ons-select> 
+                        <label id="rankByLabel"> Rank by: </label>
 
-                        <select id="rankBy">
+                        <ons-select id="rankBy">
                             <option value="prominence">Prominence</option>
                             <option value="distance" selected="selected">Distance</option>
-                        </select>
+                        </ons-select>
                     </div>
                     
                     <div class="content">
-                        <ons-scroller style="height: 200px">
-                            <ons-list>
-                                <ons-list-item modifier="longdivider">
-                                    <div id="listing">
-                                        <table id="resultsTable">
-                                            <tbody id="results"></tbody>
-                                        </table>
-                                    </div>
-                                </ons-list-item>
+                        <ons-scroller>
+                            <ons-list id="results">
                             </ons-list>
                         </ons-scroller>
                     </div>
@@ -141,28 +111,120 @@
 
         <template id="login.html">
                 <ons-page>
-                   <div class="login">
-                        <img src="img/rsz_1nearme.png"><br><br><br>
-                        <input id="sgin_email" type="email" class="text-input--underbar" placeholder="Email" value="">
-                        <input id="sgin_passwd" type="password" class="text-input--underbar" placeholder="Password" value="">
-                        <br><br>
-                        <ons-button modifier="large" class="login_btn" onclick="signin_action()">LOG IN</ons-button>
-                        <p id="psswd_link">
-                            <a href="#" onclick="showDialog('forgot_password')" >Forgot Password?</a>
-                        </p>
-                        <br>
-                        <p id="signup_link">
-                            Do not have an account?   <a href="#" onclick="showDialog('signup')" >Sign Up</a>
-                        </p>
+                  <div class="login">
+                        <div class="logo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="panel">
+                            <input id="sgin_email" type="email" class="text-input--underbar" placeholder="Email" value="avis@gmail.com"><br>
+                            <input id="sgin_passwd" type="password" class="text-input--underbar" placeholder="Password" value="visa12345">
+                            <p id="psswd_link">
+                                <a href="#" onclick="showDialog('forgot_password')" >Forgot Password?</a>
+                            </p><br>
+                            <ons-button modifier="large" class="login_btn" onclick="signin_action()">Sign In</ons-button>
+                            <br><br>
+                            <p id="signup_link">
+                                Do not have an account?   <a href="#" onclick="showDialog('signup')" >Sign Up</a>
+                            </p>
                     </div>
                 </ons-page>
         </template>
 
          <template id="settings.html">
                 <ons-page>
-                   SETTINGS
+                    <br><br>
+                  <div class="logo">
+                        <img src="img/logo.png">
+                    </div>
+                    <ons-list-title>
+                        <h2>My Account</h2>
+                    </ons-list-title>
+                    <ons-list>
+                        <ons-list-item onclick="changepasswd(event)">Change Password
+                            <!-- <ons-button modifier="cta">
+                            <ons-icon icon="ion-chevron-right" size="40px" fixed-width="true"></ons-icon>
+                        </ons-button> -->
+                        
+                        </ons-list-item>
+                        <ons-list-item onclick="changeemail(event)">Update Email</ons-list-item>
+                        <ons-list-item onclick="changeprofile(event)">Profile</ons-list-item>
+                        <ons-list-item >My Favorites</ons-list-item>
                 </ons-page>
         </template>
+
+
+        <template id="updatepassword.html">
+            <ons-page id="updatepassword">
+                <ons-toolbar>
+                    <div class="left">
+                    <ons-back-button>Back</ons-back-button>
+                    </div>
+                    <div class="center">My Account</div>
+                </ons-toolbar>
+                 <div class="changepassword">
+                    <br><br>
+                        <div class="logo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="password">
+                            <input id="newpswd" type="password" class="text-input--underbar" placeholder="New Password" value=""><br>
+                            <input id="cnfpswd" type="password" class="text-input--underbar" placeholder="Confirm Password" value="">
+                            <br><br>
+                            <ons-button modifier="large" class="passwd_btn" onclick="updatepassword()">Save</ons-button>
+                            <br><br>
+                    </div>
+            </ons-page>
+        </template>
+
+
+
+        <template id="updateemail.html">
+            <ons-page id="updateemail">
+                <ons-toolbar>
+                    <div class="left">
+                    <ons-back-button>Back</ons-back-button>
+                    </div>
+                    <div class="center">My Account</div>
+                </ons-toolbar>
+                 <div class="changeid">
+                    <br><br>
+                        <div class="logo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="password">
+                            <input id="updemail" type="email" class="text-input--underbar" placeholder="Email Id" value=""><br>
+                            <br><br>
+                            <ons-button modifier="large" class="email_btn" onclick="updateemail()">Save</ons-button>
+                            <br><br>
+                    </div>
+            </ons-page>
+        </template>
+
+
+        <template id="updateprofile.html">
+            <ons-page id="updateprofile">
+                <ons-toolbar>
+                    <div class="left">
+                    <ons-back-button>Back</ons-back-button>
+                    </div>
+                    <div class="center">My Account</div>
+                </ons-toolbar>
+                 <div class="changeid">
+                    <br><br>
+                         <div class="header-part">
+                            <ons-button id="profile" onclick="takepicture()">
+                                <img style="height: 200px; width: 200px; border-radius:50%;" id="profileimg" class="profile-thumbnail" src="img/person.png">
+                            </ons-button>
+                        </div>
+                        <div class="password">
+                            <input id="updemail" type="email" class="text-input--underbar" placeholder="Email Id" value=""><br>
+                            <br><br>
+                            <ons-button modifier="large" class="email_btn" onclick="updateemail()">Save</ons-button>
+                            <br><br>
+                    </div>
+            </ons-page>
+        </template>
+
 
         <ons-dialog id="forgot_password">
             <div style="text-align: center; padding: 10px;">
@@ -177,12 +239,16 @@
 
        <ons-dialog id="signup">
             <div style="text-align: center; padding: 10px;">
-                        <img src="img/rsz_1nearme.png">
+                        <ons-button modifier="cta" id="no_id" class="close" onclick="hideDialog('signup','no_id')">
+                            <ons-icon icon="ion-close-circled" size="40px" fixed-width="true"></ons-icon>
+                        </ons-button>
+                        <img src="img/logo.png">
                         <input id="sgup_email" type="email" class="text-input--underbar" placeholder="Email" value="">
+                        <input id="sgup_userid" type="text" class="text-input--underbar" placeholder="Username" value="">
                         <input id="sgup_passwd" type="password" class="text-input--underbar" placeholder="Create a Password" value="">
                         <input id="sgup_cnf_passwd" type="password" class="text-input--underbar" placeholder="Confirm Password" value="">
                         <br><br>
-                        <ons-button modifier="large" class="signup_btn" onclick="hideDialog('signup','signup_btn')">SIGN UP</ons-button>
+                        <ons-button modifier="large" class="signup_btn" onclick="hideDialog('signup','signup_btn')">SIGN UP</ons-button><br><br>
             </div>
         </ons-dialog>
 
